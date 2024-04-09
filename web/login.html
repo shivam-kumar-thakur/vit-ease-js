@@ -49,14 +49,8 @@
                   document.cookie = `refreshToken=${responseData.data.refreshToken}; path=/; secure; HttpOnly`;
 
                   console.log(responseData.userType);
-                  if (responseData.data.userType === "user") {
-                      window.location.href = "user-profile.html";
-                  } else if (responseData.data.userType === "ngo") {
-                      window.location.href = "ngo-profile.html";
-                  } else {
-                      console.log("Unknown User !!!");
-                  }
-
+                  window.location.href = "discussion.html";
+  
               } else {
                   console.log("Login Failed");
               }

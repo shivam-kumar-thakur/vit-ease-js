@@ -50,6 +50,7 @@
             </div>
         </div>
     </header>
+
     <div class="body">
         <div class="upper">
             <div class="left">
@@ -67,7 +68,7 @@
         </div>
         <div class="circle">
             <div class="plus">
-                <a href="raise.html"><i class="fa-duotone fa-plus fa-2x iplus"></i></a>
+                <a href="raise-discussion.html"><i class="fa-duotone fa-plus fa-2x iplus"></i></a>
             </div>
         </div>
     </div>
@@ -84,7 +85,7 @@
                     body: JSON.stringify({
                         "postType":"discussion"})
                 });
-                
+
                 const responseData = await response.json();
                 console.log(responseData);
                 if (responseData.status === 201) {

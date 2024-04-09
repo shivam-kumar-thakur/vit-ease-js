@@ -84,7 +84,7 @@
                     body: JSON.stringify({
                         "postType":"discussion"})
                 });
-
+                
                 const responseData = await response.json();
                 console.log(responseData);
                 if (responseData.status === 201) {

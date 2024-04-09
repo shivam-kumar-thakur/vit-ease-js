@@ -97,6 +97,7 @@
                   document.cookie = `accessToken=${responseData.data.accessToken}; path=/; secure; HttpOnly`;
                   document.cookie = `refreshToken=${responseData.data.refreshToken}; path=/; secure; HttpOnly`;
 
+                  console.log(responseData.userType);
                   window.location.href = "discussion.html";
               } else {
                   console.log("Login Failed");

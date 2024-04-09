@@ -26,7 +26,170 @@
     </body>
 </html>
 
+<style>
+  .final {
+    background-color: black;
+    border: 1px solid #3FB950;
+    border-radius: 15px;
+    width: 500px;
+    height: 430px;
+}
 
+.discuss {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #847F80;
+    height: 80px;
+    width: 100%;
+}
+
+.avatar {
+    position: relative;
+    margin: 20px 0px 0px 20px;
+    border: 2px solid yellow;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.name {
+    position: relative;
+    margin: -46px 0px 0px 65px;
+    color: #0988E3;
+}
+
+.id {
+    margin: 0px 0px 0px 65px;
+    color: aliceblue;
+}
+
+.code {
+    position: relative;
+    margin: 50px;
+    border-radius: 7px;
+    background-color: #3FB950;
+    text-align: center;
+    left: 270px;
+    bottom: 25px;
+    padding: 9px 20px 30px 20px;
+}
+
+.content {
+    position: relative;
+    margin: 0px 0px 0px 10px;
+    color: #FFFFFF;
+    height: 200px;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.update {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.block {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #847F80;
+    height: 60px;
+}
+
+.tag {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: #C1FF72;
+    border: 1px solid #F6F6F6;
+    border-radius: 20px;
+    margin: 15px 300px 5px 3px;
+    padding: 5px 40px 5px 40px;
+    bottom: 5px;
+}
+
+.reactions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like {
+    background-color: #2F363E;
+    position: relative;
+    top: 10px;
+    border: 1px solid #0c0f13;
+    border-radius: 20px;
+    width: 70px;
+    height: 40px;
+    padding: 3px;
+    left: 4px;
+}
+
+.but {
+    background-color: #2F363E;
+    border: none;
+    height: 100%;
+    border-radius: 40%;
+}
+
+.comments {
+    background-color: #2F363E;
+    position: relative;
+    top: 10px;
+    border: 1px solid #0c0f13;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    padding: 3px;
+    right: 50px;
+    display: flex;
+}
+
+.number {
+    position: relative;
+    bottom: 55px;
+    left: 39px;
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.type {
+    position: relative;
+    bottom: 40px;
+    left: 70px;
+    font-size: 22px;
+    font-weight: bolder;
+    color: white;
+}
+
+.icom {
+    margin-left: 40px;
+    color: white;
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.ilike {
+    color: white;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+</style>
 
 
 
@@ -54,7 +217,7 @@
             },
             body: JSON.stringify(data),
           });
-          
+
               const responseData = await response.json();
               console.log(responseData);
               if (responseData.status===201) {

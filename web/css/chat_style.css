@@ -1,0 +1,175 @@
+body{
+    background-color: #2f363e;
+}
+.container {
+    
+    background-color: #2f363e;
+}
+
+.chatbox{ 
+    padding-top: 50px; 
+    display: flex;
+    height: 10vh;
+    width: 40%; 
+    margin-left: 10%;
+}
+
+.chatbox1{
+    padding-top: 50px; 
+    display: flex;
+    height: 10vh;
+    width: 40%;
+    margin-left: 60%; 
+}
+.ii{
+    color: white;
+}
+
+.back{
+    position: fixed;
+    top: 3%;
+    left: 3%;
+}
+.avatar {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 4px solid white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.avatar_logo {
+    background-image: url(https://toppng.com/uploads/preview/cool-avatar-transparent-image-cool-boy-avatar-11562893383qsirclznyw.png);
+    background-size: cover;
+    height: 23px;
+    width: 23px;
+}
+
+.chats,
+.chat1 {
+    border: 1px solid #3fb950;
+    border-radius: 10px;
+    width: 80%;
+    height: 90%;
+    padding: 5px;
+}
+
+.name {
+    display: flex;
+}
+
+.names {
+    color: blue;
+}
+
+.time {
+    margin-left: auto; /* Adjusted for smaller screens */
+    color: white;
+}
+
+.chat {
+    color: white;
+}
+
+.chat1 {
+    border-color: #5ce1e6;
+}
+  
+.upper1{
+    position: fixed;
+    bottom: 10%;
+    height: 55px;
+    width: 90%;
+    margin-left: 4%;
+    background-color: black;
+    border-top-color:1px solid white;
+    border-right-color:1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    
+    
+    
+}
+.search1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.text_search1{
+    height: 40px;
+    background-color:#2f363e ;
+    margin-left:10px;
+    margin-right: 3%;
+    width: 90%;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.searching1{
+    position: relative;
+    background-color:transparent;
+    border: none;
+    border-color: #2f363e;
+    margin-left: 10px;
+    margin-right: 10%;
+    width: 80%;
+    height: 60%;
+    color: azure;
+    padding-left: 10%;
+    text-align: left;
+}
+.searching1::placeholder{
+    color: azure;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+}
+.searching1:focus{
+    outline: none;
+}
+
+.icon_search1{
+    width: 10%;
+    height: 39px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.send{
+    color: #7c72ff;
+}
+.anonymous1{
+    color: #7c72ff;
+}
+
+
+
+
+@media screen and (max-width: 800px){
+    .chatbox{ /* Adjusted for smaller screens */
+        padding-top: 50px; /* Adjusted for smaller screens */
+        display: flex;
+        height: 20vh;
+        width: 30%; /* Adjusted for smaller screens */
+        margin-left: 10%; /* Centering the chat boxes */
+    }
+    
+    .chatbox1{
+        padding-top: 50px; /* Adjusted for smaller screens */
+        display: flex;
+        height: 20vh;
+        width: 30%; /* Adjusted for smaller screens */
+        margin-left: 60%; 
+    }   
+}

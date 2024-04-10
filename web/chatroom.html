@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Page</title>
+</head>
+<body>
+    <form>
+        <input type="text" id="message">
+    </form>
+    <button id="sendMessage">Send</button>
+
+    <script>
+        // Function to get the value of a URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        const postId = getUrlParameter('postid');
+
+        document.getElementById("sendMessage").addEventListener("click", async () => {
+            try {
+                const message = document.getElementById("message").value;
+                const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/chat/sendChat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "postId": postId,
+                        "message": message,
+                        "postType": "discussion" // Updated to match the correct postType
+                    })
+                });
+
+                const responseData = await response.json();
+                if (responseData.status === 201) {
+                    // Add the sent message to the DOM
+                    const messagesList = document.createElement('ul');
+                    const messageItem = document.createElement('li');
+                    messageItem.textContent = message;
+                    messagesList.appendChild(messageItem);
+                    document.body.appendChild(messagesList);
+
+                    // Clear the input field after sending the message
+                    document.getElementById("message").value = '';
+
+                    // Optionally, you can reload the page to see if any changes have occurred
+                    // window.location.reload();
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+            }
+        });
+    </script>
+</body>
+</html>

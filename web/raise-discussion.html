@@ -6,7 +6,118 @@
 <title>Form Example</title>
 <link rel="stylesheet" href="css/raise.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2f363e;
+    
+}
 
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color:black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: -2px -2px 0px #4ae7ed ;
+    border:5px solid #4ae7ed;
+}
+h2{
+    color:azure;
+    /* text-align: center; */
+    margin-bottom:0px;
+    /* margin-top:4px; */
+   
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+#tags{
+    background-color: #2f363e;
+    color:white;
+    margin-top:-4px;
+}
+#An{
+    
+    color:azure;
+    /* text-align: center; */
+    font-size:20px;
+    margin-bottom: 18px;
+}
+#Anonymous{
+    background-color:#2f363e;
+    color:white;
+}
+#Sub{
+    color:azure;
+    /* text-align: center; */
+    font-size:20px;
+    margin-bottom: 18px;
+}
+
+#subject{
+    background-color: #2f363e;
+    color:white;
+}
+#Des{
+    color:azure;
+    /* text-align: center; */
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+#description{
+    background-color: #2f363e;
+    color:white;
+}
+
+select, input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+textarea {
+    height: 150px;
+    
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.back{
+    position: fixed;
+    top: 3%;
+    left: 3%;
+}
+
+
+
+
+
+.ii{
+    color: rgb(158, 88, 239);
+}
+</style>
 </head>
 <body>
 
@@ -17,6 +128,7 @@
    
     <form id="discussionForm">
         <div>
+            <h2>Block</h2>
             <label for="tags">Tags</label>
             <select id="tags" name="tags" multiple>
                 <option value="ABlock">A-Block</option>
@@ -27,24 +139,23 @@
             </select>
         </div>
         <div>
-            <label for="Anonymous">Anonymous</label>
+            <label for="Anonymous" id="An">Anonymous</label>
             <select id="Anonymous" name="Anonymous">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
             </select>
         </div>
         <div>
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject"  placeholder="Subject" required>
+            <label for="subject" id="Sub">Subject</label>
+            <input type="text" id="subject" name="subject"   required>
         </div>
         <div>
-            <label for="description">Description:</label>
+            <label for="description" id="Des">Description</label>
             <textarea id="description" name="description" required></textarea>
         </div>
         <button type="submit">Submit</button>
     </form>  
 </div>
-
 <script>
     document.getElementById('discussionForm').addEventListener('submit', async (event) => {
         event.preventDefault();

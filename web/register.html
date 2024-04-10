@@ -7,168 +7,109 @@
     <link rel="stylesheet" href="css/styles.css">
     
 <style>
-    .final {
-      background-color: black;
-      border: 1px solid #3FB950;
-      border-radius: 15px;
-      width: 500px;
-      height: 430px;
-  }
-  
-  .discuss {
-      display: flex;
-      flex-direction: row;
-      border-bottom: 1px solid #847F80;
-      height: 80px;
-      width: 100%;
-  }
-  
-  .avatar {
-      position: relative;
-      margin: 20px 0px 0px 20px;
-      border: 2px solid yellow;
-      border-radius: 50%;
-      height: 45px;
-      width: 45px;
-      display: flex;
-      justify-content: space-around;
-      overflow: hidden;
-  }
-  
-  .name {
-      position: relative;
-      margin: -46px 0px 0px 65px;
-      color: #0988E3;
-  }
-  
-  .id {
-      margin: 0px 0px 0px 65px;
-      color: aliceblue;
-  }
-  
-  .code {
-      position: relative;
-      margin: 50px;
-      border-radius: 7px;
-      background-color: #3FB950;
-      text-align: center;
-      left: 270px;
-      bottom: 25px;
-      padding: 9px 20px 30px 20px;
-  }
-  
-  .content {
-      position: relative;
-      margin: 0px 0px 0px 10px;
-      color: #FFFFFF;
-      height: 200px;
-      line-height: 1.2;
-      overflow: hidden;
-  }
-  
-  .update {
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 18px;
-      font-weight: bold;
-  }
-  
-  .block {
-      display: flex;
-      flex-direction: row;
-      border-bottom: 1px solid #847F80;
-      height: 60px;
-  }
-  
-  .tag {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      color: #C1FF72;
-      border: 1px solid #F6F6F6;
-      border-radius: 20px;
-      margin: 15px 300px 5px 3px;
-      padding: 5px 40px 5px 40px;
-      bottom: 5px;
-  }
-  
-  .reactions {
-      display: flex;
-      justify-content: space-between;
-  }
-  
-  .like {
-      background-color: #2F363E;
-      position: relative;
-      top: 10px;
-      border: 1px solid #0c0f13;
-      border-radius: 20px;
-      width: 70px;
-      height: 40px;
-      padding: 3px;
-      left: 4px;
-  }
-  
-  .but {
-      background-color: #2F363E;
-      border: none;
-      height: 100%;
-      border-radius: 40%;
-  }
-  
-  .comments {
-      background-color: #2F363E;
-      position: relative;
-      top: 10px;
-      border: 1px solid #0c0f13;
-      border-radius: 20px;
-      width: 200px;
-      height: 40px;
-      padding: 3px;
-      right: 50px;
-      display: flex;
-  }
-  
-  .number {
-      position: relative;
-      bottom: 55px;
-      left: 39px;
-      font-size: 22px;
-      font-weight: bolder;
-  }
-  
-  .type {
-      position: relative;
-      bottom: 40px;
-      left: 70px;
-      font-size: 22px;
-      font-weight: bolder;
-      color: white;
-  }
-  
-  .icom {
-      margin-left: 40px;
-      color: white;
-      margin-top: 10px;
-  }
-  
-  a {
-      text-decoration: none;
-  }
-  
-  .ilike {
-      color: white;
-  }
-  
-  .read-more {
-      color: #007bff;
-      text-decoration: none;
-      margin-top: 10px;
-      display: block;
-  }
-  
-  .read-more:hover {
-      text-decoration: underline;
-  }
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color:#2f363e;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.form {
+    background-color:black;
+    border-radius: 5px;
+    border: 1px solid #88d8d8;
+    margin: 10px 0px 10px 0px;
+    height: 94%;
+}
+
+.form h2 {
+    margin-top: 0;
+}
+
+.form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #88d8d8;
+    border-radius: 30px;
+    background-color:#2f363e ;
+}
+h1{
+    color: white;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.form button {
+    width: 100%;
+    padding: 10px;
+    background-color:#2f363e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: gray
+}
+
+.signup-link,
+.login-link {
+    text-align: center;
+}
+.login-link,.signup-link{
+    color:white
+}
+.signup-link a,
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link a:hover,
+.login-link a:hover {
+    text-decoration: underline;
+}
+.form select {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #88d8d8;
+    background-color: #2f363e;
+    color: white;
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    margin-left: 50%;
+}
+label{
+    color: white;
+}
+.form select option {
+    background-color: #2f363e;
+    color: white;
+}
+h2{
+    color: white;
+    text-align: center;
+}
+#attributes{
+    margin-bottom: 40px;
+}
+#display_name{
+    margin-bottom: 40px;
+}
   </style>
   
 </head> 
@@ -180,20 +121,22 @@
                 <h2>Sign Up</h2>
                 <input type="email" id="gmail" placeholder="Gmail"></input>
                 <input type="password" id="password" placeholder="Password"></input>
-                <input type="text" id="display_name" placeholder="Display Name"></input>
-                <label for="designation">Select which describes you:</label>
+                <input type="text" id="display_name" placeholder="Display Name"></input><br>
+                <label for="designation" class="as">Select which describes you:</label>
                 <select id="designation" name="designation">
+                    <option value="" disabled selected>Select</option>
                     <option value="student">Student</option>
                     <option value="faculty">Faculty</option>
                     <option value="others">Others</option>
-                </select>
+                </select><br>
                 <label for="gender">Select your gender:</label>
                 <select id="gender" name="gender">
+                    <option value="" disabled selected>Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="others">Others</option>
-                </select>
-                <label for="attributes">Select all that belong to you:</label>
+                </select><br>
+                <label for="hostel">Select your block:</label>
                 <select id="attributes" name="attributes" multiple>
                     <option value="ablock">A-Block</option>
                     <option value="bblock">B-Block</option>

@@ -84,69 +84,100 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            try {
-                const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/getAllPost", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "postType": "discussion"
-                    })
-                });
-
-                const responseData = await response.json();
-                console.log(responseData);
-                if (responseData.success && responseData.status === 201) {
-                    const posts = responseData.data.posts;
-                    const parent = document.getElementById("allposts");
-
-                    posts.forEach(post => {
-                        const postCard = createPostCard(post);
-                        parent.appendChild(postCard);
-                    });
-                } else {
-                    console.log("Failed to fetch posts");
+    <script>document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/getAllPost", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "postType": "discussion"
+                })
+            });
+    
+            const responseData = await response.json();
+            console.log(responseData);
+            if (responseData.success && responseData.status === 201) {
+                const posts = responseData.data.posts;
+                const parent = document.getElementById("allposts");
+    
+                for (const post of posts) {
+                    const userData = await fetchUserData(post.userId);
+                    const postCard = createPostCard(post, userData);
+                    parent.appendChild(postCard);
                 }
-            } catch (error) {
-                console.error("An error occurred:", error);
+            } else {
+                console.log("Failed to fetch posts");
             }
-        });
-
-        function createPostCard(post) {
-            const postElement = document.createElement("div");
-            postElement.classList.add("card-container");
-
-            postElement.innerHTML = `
-                <div class="per20-1">
-                    <div class="card-avatar">
-                        <div class="avatar-card">
-                            <img src="images/female.jpg" class="img-avatar">
-                        </div>
-                    </div>
-                    <div class="info-1">
-                        <span class="card-text-name">${post.display_name}</span>
-                        <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-                    </div>
-                    <div class="div-main-info">
-                        <div class="sub-card"><p class="card-text-1">${post.discussionType}</p></div>
-                    </div>
-                </div>
-                <div class="per60">
-                    <strong><p class="card-heading">${post.heading}</p></strong>
-                    <p class="card-description">${post.description}</p>
-                    <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
-                </div>
-                <div class="per20-2">
-                    <div class="card-upvote"><span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${post.upvotes.length}</span></div>
-                    <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
-                </div>
-            `;
-
-            return postElement;
+        } catch (error) {
+            console.error("An error occurred:", error);
         }
+    });
+    
+    async function fetchUserData(userId) {
+        try {
+            const response = await fetch(`https://vit-ease.shivamkrthakur.in/api/v1/user/${userId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            const userData = await response.json();
+            return userData.data.user;
+        } catch (error) {
+            console.error("An error occurred while fetching user data:", error);
+            return null;
+        }
+    }
+    
+    function createPostCard(post, userData) {
+        const postElement = document.createElement("div");
+        postElement.classList.add("card-container");
+    
+        // Determine the user avatar based on gender
+        let avatarSrc = "";
+        if (userData) {
+            if (userData.display_name === "anonymous") {
+                avatarSrc = "unknown.jpg";
+            } else {
+                if (userData.gender === "male") {
+                    avatarSrc = "male.jpg";
+                } else if (userData.gender === "female") {
+                    avatarSrc = "female.jpg";
+                }
+            }
+        }
+    
+        postElement.innerHTML = `
+            <div class="per20-1">
+                <div class="card-avatar">
+                    <div class="avatar-card">
+                        <img src="images/${avatarSrc}" class="img-avatar">
+                    </div>
+                </div>
+                <div class="info-1">
+                    <span class="card-text-name">${userData ? userData.display_name : "Unknown"}</span>
+                    <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                </div>
+                <div class="div-main-info">
+                    <div class="sub-card"><p class="card-text-1">${post.discussionType}</p></div>
+                </div>
+            </div>
+            <div class="per60">
+                <p class="card-heading">${post.heading}</p>
+                <p class="card-description">${post.description}</p>
+                <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
+            </div>
+            <div class="per20-2">
+                <div class="card-upvote"><span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${post.upvotes.length}</span></div>
+                <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
+            </div>
+        `;
+    
+        return postElement;
+    }
     </script>
 </body>
 </html>

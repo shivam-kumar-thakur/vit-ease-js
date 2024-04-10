@@ -219,6 +219,7 @@
                     <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
                 </div>
                 <div class="per20-2">
+                    
                     <div class="card-upvote" style="color: ${isLiked ? 'blue' : 'black'};" ${isLiked ? 'onclick=""' : `onclick="handleUpvote('${post._id}', '${currentUser._id}')"`}>
                         <span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${post.upvotes.length}</span>
                     </div>
@@ -236,31 +237,34 @@
         }
 
         async function handleUpvote(postId, userId) {
-            try {
-                const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/like_post", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "post_type":"discussions","postId":postId
-                    })
-                });
+    try {
+        const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/like_post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "post_type": "discussions",
+                "postId": postId
+            })
+        });
 
-                const responseData = await response.json();
-                if (responseData.success && responseData.status === 201) {
-                    // Update the UI
-                    const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
-                    upvoteButton.style.color = 'blue';
-                    upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
-                    upvoteButton.innerHTML = `<span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${responseData.upvotes.length}</span>`;
-                } else {
-                    console.log("Failed to upvote post");
-                }
-            } catch (error) {
-                console.error("An error occurred:", error);
-            }
+        const responseData = await response.json();
+        if (responseData.success && responseData.status === 201) {
+            // Update the UI
+            const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
+            upvoteButton.style.color = 'blue';
+            upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
+            const likeCountSpan = upvoteButton.querySelector('.ilike-count');
+            likeCountSpan.textContent = responseData.data.upvotes.length; // Update like count
+        } else {
+            console.log("Failed to upvote post");
         }
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+}
+
     </script>
 </body>
 </html>

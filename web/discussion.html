@@ -137,24 +137,24 @@
         postElement.classList.add("card-container");
     
         // Determine the user avatar based on gender
-        let avatarSrc = "";
-        if (userData) {
-            if (userData.display_name === "anonymous") {
-                avatarSrc = "unknown.jpg";
-            } else {
-                if (userData.gender === "male") {
-                    avatarSrc = "male.jpg";
-                } else if (userData.gender === "female") {
-                    avatarSrc = "female.jpg";
-                }
-            }
-        }
+        // let avatarSrc = "";
+        // if (userData) {
+        //     if (userData.display_name === "anonymous") {
+        //         avatarSrc = "unknown.jpg";
+        //     } else {
+        //         if (userData.gender === "male") {
+        //             avatarSrc = "male.jpg";
+        //         } else if (userData.gender === "female") {
+        //             avatarSrc = "female.jpg";
+        //         }
+        //     }
+        // }
     
         postElement.innerHTML = `
             <div class="per20-1">
                 <div class="card-avatar">
                     <div class="avatar-card">
-                        <img src="images/${avatarSrc}" class="img-avatar">
+                        <img src="images/unknown.webp" class="img-avatar">
                     </div>
                 </div>
                 <div class="info-1">

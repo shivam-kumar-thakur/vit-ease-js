@@ -75,31 +75,7 @@
         </div>
         <div class="posts" id="allposts">
             <!-- Posts will be dynamically added here -->
-            <div class="card-container">
-                <div class="per20-1">
-                    <div class="avatar">
-                        <div class="avatar-card">
-                            <img src="web/images/female.jpg" class="img-avatar">
-                        </div>
-                    </div>
-                    <div class="info-1">
-                        <span class="card-text-name">name of user</span>
-                        <span class="card-text-date">Date</span>
-                    </div>
-                    <div class="div-main-info">
-                        <div class="sub-card"><p class="card-text-1">Complain</p></div>
-                    </div>
-                </div>
-                <div class="per60">
-                    <p class="card-heading">heading</p>
-                    <p class="card-description">description</p>
-                    <p class="card-tags"><span>tag1</span>&nbsp;&nbsp;<span>tag2</span></p>
-                </div>
-                <div class="per20-2">
-                    <div class="card-upvote"><span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>20</span></div>
-                    <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
-                </div>
-            </div>
+            
 
         </div>
         <div class="circle">
@@ -117,15 +93,16 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        "postType":"discussion"})
+                        "postType": "discussion"
+                    })
                 });
-
+    
                 const responseData = await response.json();
                 console.log(responseData);
                 if (responseData.status === 201) {
                     const posts = responseData.data.posts;
                     const parent = document.getElementById("allposts");
-
+    
                     posts.forEach(post => {
                         const postCard = createPostCard(post);
                         parent.appendChild(postCard);
@@ -137,11 +114,11 @@
                 console.error("An error occurred:", error);
             }
         });
-
+    
         function createPostCard(post) {
             const postElement = document.createElement("div");
             postElement.classList.add("final");
-
+    
             postElement.innerHTML = `
                 <div class="discuss">
                     <div class="avatar">
@@ -186,5 +163,4 @@
             return postElement;
         }
     </script>
-</body>
-</html>
+    </body></html>

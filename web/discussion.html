@@ -253,7 +253,7 @@ async function handleUpvote(postId, userId) {
 
         const responseData = await response.json();
         if (responseData.success && responseData.status === 201) {
-            / Update the UI
+            // Update the UI
             const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
             upvoteButton.style.color = 'blue';
             upvoteButton.style.pointerEvents = 'none'; // Disable further clicks

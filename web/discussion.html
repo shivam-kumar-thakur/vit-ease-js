@@ -103,7 +103,7 @@
                 const parent = document.getElementById("allposts");
     
                 for (const post of posts) {
-                    const postCard = createPostCard(post);
+                    const postCard = createPostCard(post,responseData.data.user.);
                     postCard.setAttribute("id", post._id); // Set the id attribute
                     parent.appendChild(postCard);
                 }
@@ -123,11 +123,11 @@
             <div class="per20-1">
                 <div class="card-avatar">
                     <div class="avatar-card">
-                        <img src="images/${post.display_name === 'anonymous' ? 'unknown' : (post.display_name === 'male' ? 'male' : 'female')}.jpg" class="img-avatar">
+                        <img src="images/${post.display_name === 'anonymous' ? 'unknown.webp' : `person.jpg`}" class="img-avatar">
                     </div>
                 </div>
                 <div class="info-1">
-                    <span class="card-text-name">${post.display_name === 'anonymous' ? 'Unknown' : post.display_name}</span>
+                    <span class="card-text-name">${post.display_name}</span>
                     <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                 </div>
                 <div class="div-main-info">
@@ -148,7 +148,7 @@
         const chatReplyButton = postElement.querySelector(".card-reply");
         chatReplyButton.addEventListener("click", () => {
             // Redirect to new page with postid attribute in URL
-            window.location.href = `new_page.html?postid=${post._id}`;
+            window.location.href = `chatroom.html?postid=${post._id}`;
         });
     
         return postElement;

@@ -225,12 +225,6 @@
                 </div>
             `;
 
-            const chatReplyButton = postElement.querySelector(".card-reply");
-            chatReplyButton.addEventListener("click", () => {
-                // Redirect to new page with postid attribute in URL
-                window.location.href = `chatroom.html?postid=${post._id}`;
-            });
-
             return postElement;
         }
 

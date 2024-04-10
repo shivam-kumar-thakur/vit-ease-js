@@ -145,126 +145,124 @@
 
 
     <script>
-        
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                // Fetch all posts
+                const responsePosts = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/getAllPost", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "postType": "discussion"
+                    })
+                });
 
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        // Fetch all posts
-        const responsePosts = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/getAllPost", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "postType": "discussion"
-            })
+                const responseDataPosts = await responsePosts.json();
+                console.log(responseDataPosts);
+                if (responseDataPosts.success && responseDataPosts.status === 201) {
+                    const posts = responseDataPosts.data.posts;
+                    const parent = document.getElementById("allposts");
+
+                    // Fetch current user data
+                    const responseUser = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/enter/current-user", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+
+                    const responseDataUser = await responseUser.json();
+                    console.log(responseDataUser);
+                    if (responseDataUser.success && responseDataUser.status === 201) {
+                        const currentUser = responseDataUser.message;
+
+                        for (const post of posts) {
+                            const postCard = createPostCard(post, currentUser);
+                            postCard.setAttribute("id", post._id); // Set the id attribute
+                            parent.appendChild(postCard);
+                        }
+                    } else {
+                        console.log("Failed to fetch current user data");
+                    }
+                } else {
+                    console.log("Failed to fetch posts");
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+            }
         });
 
-        const responseDataPosts = await responsePosts.json();
-        console.log(responseDataPosts);
-        if (responseDataPosts.success && responseDataPosts.status === 201) {
-            const posts = responseDataPosts.data.posts;
-            const parent = document.getElementById("allposts");
+        function createPostCard(post, currentUser) {
+            const postElement = document.createElement("div");
+            postElement.classList.add("card-container");
 
-            // Fetch current user data
-            const responseUser = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/enter/current-user", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
+            // Check if the current user has liked the post
+            const isLiked = currentUser.discussion_likes.includes(post._id);
+
+            postElement.innerHTML = `
+                <div class="per20-1">
+                    <div class="card-avatar">
+                        <div class="avatar-card">
+                            <img src="images/${post.display_name === 'anonymous' ? 'unknown.webp' : 'person.jpg'}" class="img-avatar">
+                        </div>
+                    </div>
+                    <div class="info-1">
+                        <span class="card-text-name" style="color:green;">${post.display_name}</span>
+                        <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <div class="div-main-info">
+                        <div class="sub-card"><p class="card-text-1">${post.discussionType}</p></div>
+                    </div>
+                </div>
+                <div class="per60"><br>
+                    <p class="card-heading">${post.heading}</p><br>
+                    <p class="card-description">${post.description}</p>
+                    <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
+                </div>
+                <div class="per20-2">
+                    <div class="card-upvote" style="color: ${isLiked ? 'blue' : 'black'};" onclick="handleUpvote('${post._id}', '${currentUser._id}')">
+                        <span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${post.upvotes.length}</span>
+                    </div>
+                    <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
+                </div>
+            `;
+
+            const chatReplyButton = postElement.querySelector(".card-reply");
+            chatReplyButton.addEventListener("click", () => {
+                // Redirect to new page with postid attribute in URL
+                window.location.href = `chatroom.html?postid=${post._id}`;
             });
 
-            const responseDataUser = await responseUser.json();
-            console.log(responseDataUser);
-            if (responseDataUser.success && responseDataUser.status === 201) {
-                const currentUser = responseDataUser.message;
+            return postElement;
+        }
 
-                for (const post of posts) {
-                    const postCard = createPostCard(post, currentUser);
-                    postCard.setAttribute("id", post._id); // Set the id attribute
-                    parent.appendChild(postCard);
+        async function handleUpvote(postId, userId) {
+            try {
+                const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/like_post", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "post_type":"discussions","postId":postId
+                    })
+                });
+
+                const responseData = await response.json();
+                if (responseData.success && responseData.status === 201) {
+                    // Update the UI
+                    const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
+                    upvoteButton.style.color = 'blue';
+                    upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
+                    upvoteButton.innerHTML = `<span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${responseData.upvotes.length}</span>`;
+                } else {
+                    console.log("Failed to upvote post");
                 }
-            } else {
-                console.log("Failed to fetch current user data");
+            } catch (error) {
+                console.error("An error occurred:", error);
             }
-        } else {
-            console.log("Failed to fetch posts");
         }
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-});
-
-function createPostCard(post, currentUser) {
-    const postElement = document.createElement("div");
-    postElement.classList.add("card-container");
-
-    // Check if the current user has liked the post
-    const isLiked = currentUser.discussion_likes.includes(post._id);
-
-    postElement.innerHTML = `
-        <div class="per20-1">
-            <div class="card-avatar">
-                <div class="avatar-card">
-                    <img src="images/${post.display_name === 'anonymous' ? 'unknown.webp' : 'person.jpg'}" class="img-avatar">
-                </div>
-            </div>
-            <div class="info-1">
-                <span class="card-text-name" style="color:green;">${post.display_name}</span>
-                <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
-            </div>
-            <div class="div-main-info">
-                <div class="sub-card"><p class="card-text-1">${post.discussionType}</p></div>
-            </div>
-        </div>
-        <div class="per60"><br>
-            <p class="card-heading">${post.heading}</p><br>
-            <p class="card-description">${post.description}</p>
-            <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
-        </div>
-        <div class="per20-2">
-            <div class="card-upvote" style="color: ${isLiked ? 'blue' : 'black'};" onclick="handleUpvote('${post._id}', '${currentUser._id}')">
-                <span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${post.upvotes.length}</span>
-            </div>
-            <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
-        </div>
-    `;
-
-    const chatReplyButton = postElement.querySelector(".card-reply");
-    chatReplyButton.addEventListener("click", () => {
-        // Redirect to new page with postid attribute in URL
-        window.location.href = `chatroom.html?postid=${post._id}`;
-    });
-
-    return postElement;
-}
-
-async function handleUpvote(postId, userId) {
-    try {
-        const response = await fetch("https://vit-ease.shivamkrthakur.in/api/v1/post/like_post", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "post_type":"discussions","postId":postId
-            })
-        });
-
-        const responseData = await response.json();
-        if (responseData.success && responseData.status === 201) {
-            // Update the UI
-            const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
-            upvoteButton.style.color = 'blue';
-            upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
-            upvoteButton.innerHTML = `<span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i>${responseData.data.upvotes.length}</span>`;
-        } else {
-            console.log("Failed to upvote post");
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-}
     </script>
 </body>
 </html>

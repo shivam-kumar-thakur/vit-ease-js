@@ -254,15 +254,18 @@
             const upvoteButton = document.querySelector(`#${postId} .card-upvote`);
             upvoteButton.style.color = 'blue';
             upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
+            const value=getElementByClassName("ilike-count").[0];
+            
             const likeCountSpan = upvoteButton.querySelector('.ilike-count');
-            const currentCount = parseInt(likeCountSpan.textContent);
-            likeCountSpan.textContent = currentCount + 1; // Increment like count
+            likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1; // Increment like count
         } else {
             console.log("Failed to upvote post");
         }
     } catch (error) {
         console.error("An error occurred:", error);
     }
+
+
 }
 
     </script>

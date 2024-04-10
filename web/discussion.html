@@ -220,7 +220,7 @@
                 </div>
                 <div class="per20-2">
                     <div class="card-upvote" style="color: ${isLiked ? 'blue' : 'black'};" ${isLiked ? 'onclick=""' : `onclick="handleUpvote('${post._id}', '${currentUser._id}')"`}>
-    <span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i><span class="ilike-count">${post.upvotes.length + 1}</span></span>
+    <span><i class="fa-solid fa-thumbs-up fa-2x ilike" style="font-size:18px ;">&nbsp;&nbsp;</i><button class="ilike-count" >${post.upvotes.length + 1}</span></span>
 </div>
                     <div class="card-reply"><span><i class="fa-regular fa-comment"></i> Enter into desk !</span></div>
                 </div>
@@ -255,15 +255,14 @@
             upvoteButton.style.color = 'blue';
             upvoteButton.style.pointerEvents = 'none'; // Disable further clicks
             const likeCountSpan = upvoteButton.querySelector('.ilike-count');
-            likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1; // Increment like count
+            const currentCount = parseInt(likeCountSpan.textContent);
+            likeCountSpan.textContent = currentCount + 1; // Increment like count
         } else {
             console.log("Failed to upvote post");
         }
     } catch (error) {
         console.error("An error occurred:", error);
     }
-
-
 }
 
     </script>

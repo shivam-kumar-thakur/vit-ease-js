@@ -103,7 +103,7 @@
                 const parent = document.getElementById("allposts");
     
                 for (const post of posts) {
-                    const postCard = createPostCard(post,responseData.data.user.);
+                    const postCard = createPostCard(post);
                     postCard.setAttribute("id", post._id); // Set the id attribute
                     parent.appendChild(postCard);
                 }
@@ -123,7 +123,7 @@
             <div class="per20-1">
                 <div class="card-avatar">
                     <div class="avatar-card">
-                        <img src="images/${post.display_name === 'anonymous' ? 'unknown.webp' : `person.jpg`}" class="img-avatar">
+                        <img src="images/${post.display_name === 'anonymous' ? 'unknown.webp' : 'person.jpg'}" class="img-avatar">
                     </div>
                 </div>
                 <div class="info-1">

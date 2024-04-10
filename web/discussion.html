@@ -89,7 +89,7 @@
 
             const responseData = await response.json();
             console.log(responseData);
-            if (responseData.success) {
+            if (responseData.status===201) {
                 const posts = responseData.data.posts;
                 const parent = document.getElementById("allposts");
 

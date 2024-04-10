@@ -58,12 +58,6 @@
             <div class="left">
                 <h2 class="msg">Hello!</h2>
             </div>
-            <div class="right">
-                <a href="#">
-                    <span class="fil">Filter</span>
-                    <i class="fa-solid fa-filter fa-1x if"></i>
-                </a>
-            </div>
         </div>
         <div class="posts" id="allposts">
             <!-- Posts will be dynamically added here -->
@@ -119,15 +113,15 @@
                     </div>
                 </div>
                 <div class="info-1">
-                    <span class="card-text-name">${post.display_name}</span>
+                    <span class="card-text-name" style="color:green;">${post.display_name}</span>
                     <span class="card-text-date">${new Date(post.createdAt).toLocaleDateString()}</span>
                 </div>
                 <div class="div-main-info">
                     <div class="sub-card"><p class="card-text-1">${post.discussionType}</p></div>
                 </div>
             </div>
-            <div class="per60">
-                <p class="card-heading">${post.heading}</p>
+            <div class="per60"><br>
+                <p class="card-heading">${post.heading}</p><br>
                 <p class="card-description">${post.description}</p>
                 <p class="card-tags">${post.tags.map(tag => `<span>${tag}</span>`).join('&nbsp;&nbsp;')}</p>
             </div>

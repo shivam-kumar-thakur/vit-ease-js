@@ -11,6 +11,7 @@
     border-radius: 30px;
     background-color: black;
     color: white;
+    margin: 5px;
 }
 .per20-1{
     height: 15%;
@@ -50,7 +51,7 @@ align-items: center;
 .sub-card {
 background-color: green;
 width: 92%;
-height: 58%;
+height: 65%;
 display: flex;
 flex-direction: column;
 flex-wrap: nowrap;
@@ -119,4 +120,12 @@ overflow: hidden;
 .img-avatar{
 width: 100%;
 height: 100%;
+}
+
+.div-main-info {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -53,11 +53,16 @@
         const formData = new FormData(form);
 
         const discussionData = {
-            discussionType: "discussion",
-            heading: formData.get('subject'),
-            description: formData.get('description'),
-            anonymous: formData.get('Anonymous'),
-            tags: Array.from(formData.getAll('tags')) // Convert NodeList to array
+            "discussionType":"complain",
+    "heading":"agfjhdsvjhsbchjsbhc dfjds  j hjd bj h dj shdj vs", "description":"bjhebohvbouv  oj wfhodb hda uhebvhb ah bvoahv bdahov oh dh bvu hbv ouhdv ohdabv dhv bug vojhdabv uhe davojhsa baheubv jha vhgdaas","anonymous":false,
+    "tags":[
+        "A-Block","B-Block"]
+    // ]
+    //         discussionType: "discussion",
+    //         heading: formData.get('subject'),
+    //         description: formData.get('description'),
+    //         anonymous: formData.get('Anonymous'),
+    //         tags: Array.from(formData.getAll('tags')) // Convert NodeList to array
         };
 
         try {
